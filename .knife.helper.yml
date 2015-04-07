@@ -1,0 +1,16 @@
+---
+settings:
+  exec_path: /home/marcy/.rbenv/versions/2.1.5/bin/knife
+
+commands:
+  - name: create
+    command: ec2 server create
+    condition:
+    options:
+      aws-access-key-id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+      aws-secret-access-key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+      region: <%= ENV['AWS_REGION'] %>
+      flavor: t2.micro
+      image: ami-cbf90ecb
+      tags: Name=knife-helper-example
+      ssh-key: knife-helper-example

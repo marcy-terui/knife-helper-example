@@ -1,16 +1,38 @@
 ---
 settings:
-  exec_path: /home/marcy/.rbenv/versions/2.1.5/bin/knife
+  exec_path: /Users/marcy/github/knife-helper-example/vendor/bundle/ruby/2.1.0/bin/knife
 
 commands:
   - name: create
     command: ec2 server create
-    condition:
     options:
       aws-access-key-id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
       aws-secret-access-key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-      region: <%= ENV['AWS_REGION'] %>
+      region: ap-southeast-1
       flavor: t2.micro
-      image: ami-cbf90ecb
+      image: ami-68d8e93a
       tags: Name=knife-helper-example
       ssh-key: knife-helper-example
+      subnet: subnet-3dc43e58
+      security-group-ids: sg-713bc314
+      ssh-user: ec2-user
+      identity-file: ~/.ssh/knife-helper-example.pem
+      template-file: template.erb
+      associate-public-ip:
+  - name: bootstrap
+    command: zero bootstrap ec2-52-74-50-188.ap-southeast-1.compute.amazonaws.com
+    options:
+      node-name: knife-helper-example
+      environment: test
+      hint: ec2
+      ssh-user: ec2-user
+      identity-file: ~/.ssh/knife-helper-example.pem
+      sudo:
+  - name: converge
+    command: zero chef_client
+    condition: chef_environment:test
+    options:
+      ssh-user: ec2-user
+      identity-file: ~/.ssh/knife-helper-example.pem
+      attribute: ec2.public_ipv4
+      sudo:

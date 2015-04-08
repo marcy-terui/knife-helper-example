@@ -1,3 +1,3 @@
-local_mode false
-cookbook_path ["../cookbooks", "../site-cookbooks"]
-chef_repo_path "../"
+local_mode true
+cookbook_path ["./cookbooks", "./site-cookbooks"]
+chef_repo_path "./"

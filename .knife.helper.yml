@@ -1,6 +1,6 @@
 ---
 settings:
-  exec_path: /Users/marcy/github/knife-helper-example/vendor/bundle/ruby/2.1.0/bin/knife
+  command_base: /Users/marcy/github/knife-helper-example/vendor/bundle/ruby/2.1.0/bin/knife
 
 commands:
   - name: create
